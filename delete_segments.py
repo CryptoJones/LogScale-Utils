@@ -1,8 +1,10 @@
 import csv
 import subprocess
 
+token = 'AXOKAimsafMOI01oiasdoaso1221031923-21093'
 csv_file_path = 'your_file.csv'
-endpoint = 'https://mylogscaleurl/api/v1/repositories/'
+url = 'localhost:8080'
+endpoint = f'https://{url}/api/v1/repositories/'
 
 # Open the CSV file and iterate through each row
 with open(csv_file_path, 'r') as csvfile:
@@ -18,6 +20,6 @@ with open(csv_file_path, 'r') as csvfile:
         url = f'{endpoint}{repository_name}/datasources/{datasource_id}/segments/{segment_id}/'
         
         # Use subprocess to make HTTP delete request with curl
-        subprocess.run(['curl', '-X', 'DELETE', url])
+        subprocess.run(['curl', '-X', 'DELETE', f'-H Authorization: Bearer {token}', url])
 
 print('HTTP delete requests completed.')
